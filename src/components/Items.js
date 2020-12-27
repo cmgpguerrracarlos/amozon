@@ -33,6 +33,10 @@ export default class Items extends Component {
         this.props.onUpdateRating({id: this.state.id, title: this.state.title, image: this.state.image, rating: rating});
     }
 
+    getIdToDelete = (e)=>{
+        this.props.onDelete(this.state.id);
+    }
+
     render() {
         return (
             <div className="item">
@@ -57,7 +61,7 @@ export default class Items extends Component {
                     </select>
                 </div>
                 <div className="actions">
-                    <button>Eliminar</button>
+                    <button onClick={this.getIdToDelete}>Eliminar</button>
                 </div>
                     
                 

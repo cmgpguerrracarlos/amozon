@@ -52,11 +52,18 @@ export default class App extends Component {
     this.setState({books: [...temp],copyBooks: [...temp]});
   }
 
+  onDelete = (id)=>{
+    let temp = [...this.state.books];
+    const res = temp.filter(item => item.id !== id);
+    this.setState({books: [...res], copyBooks: [...res]});
+    
+  }
+
   render() {
     return (
       <div className="app">
         <Menu title="Amozon" onAdd={this.onAdd}/>
-        <List items={this.state.copyBooks} onUpdateRating={this.onUpdateRating}/>
+        <List items={this.state.copyBooks} onUpdateRating={this.onUpdateRating} onDelete={this.onDelete}/>
       </div>
     )
   }

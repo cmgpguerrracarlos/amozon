@@ -13,6 +13,7 @@ function List(props) {
                             image={item.image}
                             rating={item.rating}
                             onUpdateRating={props.onUpdateRating}
+                            onDelete={props.onDelete}
                         />
                     )
             }
