@@ -21,8 +21,16 @@ export default class Items extends Component {
             rating: parseInt(this.props.rating),
             stars: Array(parseInt(this.props.rating)).fill(0)
         });
-        console.log(this.state.rating);
-        console.log(this.state.stars);
+    }
+
+    onChangeRating(e){
+        const rating = parseInt(e.target.value)
+        this.setState({
+            rating: parseInt(e.target.value),
+            stars: Array(parseInt(e.target.value)).fill(1)
+        });
+
+        this.props.onupdaterating({id: this.state.id, title: this.state.title, image: this.state.image, rating: rating});
     }
 
     render() {
@@ -40,7 +48,7 @@ export default class Items extends Component {
 
                     </p>
                     Clasificacion:
-                    <select value={this.state.rating}>
+                    <select value={this.state.rating} onChange={this.onChangeRating}>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>

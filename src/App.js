@@ -18,25 +18,32 @@ export default class App extends Component {
     }
   }
 
-  setCopy =()=>{
+  setCopy = ()=>{
     this.setState({copyBooks: [...this.state.books]});
+    this.state.books.map((item)=>{
+      console.table(item);
+      return null;     
+    })
   }
 
   componentDidMount(){
     this.setCopy();
+    console.log("Montado el componente");
   }
 
   onAdd = (item)=>{
-    console.log("en el onadd")
-    console.table(item)
-    var temp = [...this.state.books];
-    const id = temp[temp.length-1].id + 1;
+    let temp = [...this.state.books];
+    let id = temp[temp.length-1].id + 1;
     item['id'] = id;
     temp.push(item);
-    this.setState({books: [...temp]});
-    this.setCopy();
-    console.log(this.state.books);
-    console.log(this.state.copyBooks);
+    console.log("valores de temp");
+    temp.map((em)=>{
+      console.table(em);
+      return null;     
+    })
+    console.log("===============================");
+    this.setState({books: [...temp],copyBooks: [...temp]})
+    
   }
 
   render() {

@@ -35,7 +35,6 @@ class PanelAdd extends React.Component{
         const image = this.state.image;
         const rating = this.state.rating;
         this.props.onAdd({title: title, image: image, rating: rating});
-        console.table({title: title, image: image, rating: rating});
         this.cancelAction();
     }
 
