@@ -20,10 +20,6 @@ export default class App extends Component {
 
   setCopy = ()=>{
     this.setState({copyBooks: [...this.state.books]});
-    this.state.books.map((item)=>{
-      console.table(item);
-      return null;     
-    })
   }
 
   componentDidMount(){
@@ -46,11 +42,21 @@ export default class App extends Component {
     
   }
 
+  onUpdateRating =(item)=>{
+    var temp = [...this.state.books];
+    const index = temp.findIndex(x => x.id === item.id);
+    temp[index].title = item.title;
+    temp[index].image = item.image;
+    temp[index].rating = item.rating;
+
+    this.setState({books: [...temp],copyBooks: [...temp]});
+  }
+
   render() {
     return (
       <div className="app">
         <Menu title="Amozon" onAdd={this.onAdd}/>
-        <List items={this.state.copyBooks}/>
+        <List items={this.state.copyBooks} onUpdateRating={this.onUpdateRating}/>
       </div>
     )
   }

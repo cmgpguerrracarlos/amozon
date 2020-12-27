@@ -23,14 +23,14 @@ export default class Items extends Component {
         });
     }
 
-    onChangeRating(e){
+    onChangeRating =(e)=>{
         const rating = parseInt(e.target.value)
         this.setState({
             rating: parseInt(e.target.value),
             stars: Array(parseInt(e.target.value)).fill(1)
         });
 
-        this.props.onupdaterating({id: this.state.id, title: this.state.title, image: this.state.image, rating: rating});
+        this.props.onUpdateRating({id: this.state.id, title: this.state.title, image: this.state.image, rating: rating});
     }
 
     render() {
