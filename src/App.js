@@ -22,13 +22,22 @@ export default class App extends Component {
     this.setState({copyBooks: [...this.state.books]});
   }
 
-  componentDidMount(){
-    this.setCopy();
+  fetchBooks = async ()=>{
+    let res = await fetch('http://localhost:3000/api/books');
+    let books = await res.json();
+    this.setState({books});
+  }
+
+  async componentDidMount(){
+    //this.setCopy();
+    this.fetchBooks();
+
+    this.setState({copyBooks: [...this.state.books]})
     console.log("Montado el componente");
   }
 
   onAdd = (item)=>{
-    let temp = [...this.state.books];
+    var temp = [...this.state.books];
     let id = temp[temp.length-1].id + 1;
     item['id'] = id;
     temp.push(item);
