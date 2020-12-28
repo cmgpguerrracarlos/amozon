@@ -58,11 +58,29 @@ export default class App extends Component {
     this.setState({books: [...res], copyBooks: [...res]});
     
   }
+  
+  onSearch = (query)=>{
+    var temp = [...this.state.books];
+    const res = [];
+
+    if(query === ''){
+      this.setState({copyBooks: [...this.state.books]});  
+    }else{
+      
+      temp.forEach(item => {
+        if(item.title.toLowerCase().indexOf(query) > -1){
+          res.push(item);
+        }
+      })   
+    }
+
+    this.setState({copyBooks:[...res]});
+  }
 
   render() {
     return (
       <div className="app">
-        <Menu title="Amozon" onAdd={this.onAdd}/>
+        <Menu title="Amozon" onAdd={this.onAdd} onSearch={this.onSearch}/>
         <List items={this.state.copyBooks} onUpdateRating={this.onUpdateRating} onDelete={this.onDelete}/>
       </div>
     )

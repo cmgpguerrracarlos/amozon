@@ -26,7 +26,7 @@ export default class Menu extends Component {
             <div className="container">
                 <div className="subcontainer">
                     <div className="logo">{this.props.title}</div>
-                    <div className="search"><Search /></div>
+                    <div className="search"><Search onSearch={this.props.onSearch} /></div>
                     <div className="actions">
                         <button onClick={this.add} className="button btn-blue">add item</button>
                     </div>
