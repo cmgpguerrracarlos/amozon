@@ -7,7 +7,7 @@ function List(props) {
             {
                 props.items.map(item=>
                         <Items 
-                            key={item.id}
+                            key={Math.floor(Math.random()*1000)}
                             id={item.id}
                             title={item.title}
                             image={item.image}

@@ -2,18 +2,17 @@ import React, { Component } from 'react'
 import './App.css'
 import Menu from './components/Menu'
 import List from './components/List'
+import axios from 'axios'
+
+const api = axios.create({
+  baseURl:'http://localhost:3050/books'
+});
 
 export default class App extends Component {
   constructor(props){
     super(props);
     this.state={
-      books:[
-        {id:0, rating: 4, title: 'Harry Potter y el cáliz de fuego', image: 'libro01.jpg'},
-        {id:1, rating: 3, title: 'The shining', image: 'libro02.jpg'},
-        {id:2, rating: 5, title: 'Código Da Vinci', image: 'libro03.jpg'},
-        {id:3, rating: 5, title: 'El principito', image: 'libro04.jpg'},
-        {id:4, rating: 5, title: 'Sobrenatural', image: 'libro05.jpg'}
-      ],
+      books:[],
       copyBooks:[]
     }
   }
@@ -23,22 +22,23 @@ export default class App extends Component {
   }
 
   fetchBooks = async ()=>{
-    let res = await fetch('http://localhost:3000/api/books');
-    let books = await res.json();
-    this.setState({books});
+    api.get('/').then(res=>{
+      console.log(res.data);
+      this.setState({
+        books:res.data
+      });
+    }).catch(error=>{console.error(error)});
+    this.setState({copyBooks:this.state.books});
   }
 
   async componentDidMount(){
-    //this.setCopy();
     this.fetchBooks();
-
-    this.setState({copyBooks: [...this.state.books]})
     console.log("Montado el componente");
   }
 
   onAdd = (item)=>{
-    var temp = [...this.state.books];
-    let id = temp[temp.length-1].id + 1;
+    var temp = [...this.state.copyBooks];
+    let id = temp[temp.length-1].id + 2;
     item['id'] = id;
     temp.push(item);
     console.log("valores de temp");
